@@ -11,9 +11,10 @@ Azure CLI Commands
 ```
 $ az login
 
-# create a reasource group
+# create a resource group
 $ az group create \
     --name tweetSchedulerRG \
     --location norwayeast
+
 
 ```
