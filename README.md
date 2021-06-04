@@ -6,7 +6,24 @@ Work outline:
 - [ ] Create program that connects with Twitter API.
 
 
-Azure CLI Commands
+
+# Prepare Azure Function
+
+## Create and activate a virtual environment
+```
+$ python -m venv .venv
+$ source .venv/bin/activate
+```
+
+## Create a local function project
+
+```
+$ func init tweetSchedulerProj --python
+$ cd LocalFunctionProj
+```
+
+
+
 
 ```
 $ az login
