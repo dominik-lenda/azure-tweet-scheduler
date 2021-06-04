@@ -4,3 +4,16 @@
 Work outline:
 - [ ] Prepare Azure Function.
 - [ ] Create program that connects with Twitter API.
+
+
+Azure CLI Commands
+
+```
+$ az login
+
+# create a reasource group
+$ az group create \
+    --name tweetSchedulerRG \
+    --location norwayeast
+
+```
