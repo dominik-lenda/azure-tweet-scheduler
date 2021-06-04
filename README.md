@@ -15,7 +15,7 @@ $ python -m venv .venv
 $ source .venv/bin/activate
 ```
 
-## Create a local function project using TimerTriger template
+## Create a local function project using TimerTrigger template
 
 ```
 $ func init tweetSchedulerProj --python
@@ -24,3 +24,4 @@ $ func new \
     --name timerTriggeredTweet \
     --template TimerTrigger
 ```
+* Problems with testing the code locally: AzureWebJobsStorage in local.settings.json is required. The storage can be emulated using Azure Storage Emulator. But it works only for Windows. For Linux community created Azurite.
