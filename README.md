@@ -2,8 +2,10 @@
 > Tweet scheduler, which uses time-triggered Azure Functions
 
 Work outline:
-- [ ] Prepare Azure Function.
-- [ ] Create program that connects with Twitter API.
+- [ ] Prepare timer-triggered Azure Functions
+- [ ] Create database using CosmosDB
+- [ ] Bind Azure Functions with database
+- [ ] Create programt that interacts with Twitter API
 
 
 
