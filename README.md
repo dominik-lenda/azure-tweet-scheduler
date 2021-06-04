@@ -15,23 +15,12 @@ $ python -m venv .venv
 $ source .venv/bin/activate
 ```
 
-## Create a local function project
+## Create a local function project using TimerTriger template
 
 ```
 $ func init tweetSchedulerProj --python
 $ cd LocalFunctionProj
-```
-
-
-
-
-```
-$ az login
-
-# create a resource group
-$ az group create \
-    --name tweetSchedulerRG \
-    --location norwayeast
-
-
+$ func new \
+    --name timerTriggeredTweet \
+    --template TimerTrigger
 ```
