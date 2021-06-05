@@ -9,7 +9,7 @@ Work outline:
 
 
 
-# Prepare Azure Function
+# Prepare timer-triggered Azure Functions
 
 ## Create and activate a virtual environment
 ```
@@ -26,4 +26,5 @@ $ func new \
     --name timerTriggeredTweet \
     --template TimerTrigger
 ```
-* Problems with testing the code locally: AzureWebJobsStorage in local.settings.json is required. The storage can be emulated using Azure Storage Emulator. But it works only for Windows. For Linux community created Azurite.
+
+* Test the function locally using Azurite on Linux or Azure Storage Emulator on Windows.
