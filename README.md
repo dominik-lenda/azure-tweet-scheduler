@@ -3,7 +3,7 @@
 
 Work outline:
 - [x] Create and deploy timer-triggered Azure Functions
-- [ ] Create database using CosmosDB
+- [ ] Create database using CosmosDB SQL API SDK for Python
 - [ ] Bind Azure Functions with database
 - [ ] Create programt that interacts with Twitter API
 
@@ -53,4 +53,13 @@ $ az functionapp create \
 ## Deploy the function project to Azure
 ```
 func azure functionapp publish ScheduleTweetsDL
+```
+
+# Create database using CosmosDB SQL API SDK for Python
+
+```bash
+COSMOS_DB_ACCOUNT_NAME="tweetScheduler-cosmosdb-dl"
+az cosmosdb create \
+    --resource-group tweetSchedulerFunction-rg \
+    --name $COSMOS_DB_ACCOUNT_NAME
 ```
