@@ -3,7 +3,7 @@
 
 Work outline:
 - [x] Create and deploy timer-triggered Azure Functions
-- [ ] Create Cosmos DB account, database, and container using ARM template
+- [X] Create Cosmos DB account, database, and container
 - [ ] Bind Azure Functions with database
 - [ ] Create program that interacts with Twitter API
 
@@ -55,4 +55,6 @@ $ az functionapp create \
 func azure functionapp publish ScheduleTweetsDL
 ```
 
-# Create Cosmos DB account, database, and container using ARM template
+# Create Cosmos DB account, database, and container
+I've done it in Azure Portal; I'll prepare it in Bicep soon.
+
