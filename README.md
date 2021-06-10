@@ -56,5 +56,68 @@ func azure functionapp publish ScheduleTweetsDL
 ```
 
 # Create Cosmos DB account, database, and container
-I've done it in Azure Portal; I'll prepare it in Bicep soon.
+
+## Create Cosmos DB account 
+```
+az cosmosdb create \
+    --resource-group tweetSchedulerFunction-rg \
+    --name scheduletweets-db
+```
+## Install Azure Cosmos DB Python SDK
+```
+pip install azure-cosmos
+```
+
+## Configure a virtual environment
+```
+python3 -m venv azure-cosmosdb-sdk-environment
+source azure-cosmosdb-sdk-environment/bin/activate
+```
+
+## Get credentials
+
+```bash
+RES_GROUP="tweetSchedulerFunction-rg"
+ACCT_NAME="scheduletweets-db"
+
+export ACCOUNT_URI=$(az cosmosdb show --resource-group $RES_GROUP --name $ACCT_NAME --query documentEndpoint --output tsv)
+export ACCOUNT_KEY=$(az cosmosdb keys list --resource-group $RES_GROUP --name $ACCT_NAME --query primaryMasterKey --output tsv)
+```
+
+## Create database, container, and first item
+
+```python
+from azure.cosmos import CosmosClient, PartitionKey, exceptions
+
+import os
+
+url = os.environ['ACCOUNT_URI']
+key = os.environ['ACCOUNT_KEY']
+client = CosmosClient(url, credential=key)
+
+database_name = 'tweetSchedulerDB'
+try:
+    database = client.create_database(database_name)
+except exceptions.CosmosResourceExistsError:
+    database = client.get_database_client(database_name)
+container_name = 'Tweets'
+
+try:
+    container = database.create_container(id=container_name, partition_key=PartitionKey(path="/productName"))
+except exceptions.CosmosResourceExistsError:
+    container = database.get_container_client(container_name)
+except exceptions.CosmosHttpResponseError:
+    raise
+
+container.upsert_item({
+    'id': '1',
+    'tweet_content': 'First tweet'
+    }
+)
+
+```
+
+
+
+
 
