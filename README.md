@@ -43,20 +43,23 @@ func start
 ## Create needed resources and resource 
 ```bash
 # create a resource group
+RESOURCE_GROUP_NAME="tweetSchedulerFunction-rg"
 az group create \
-    --name tweetSchedulerFunction-rg \
+    --name $RESOURCE_GROUP_NAME \
     --location norwayeast
 # create a storage account
+STORAGE_ACCOUNT_NAME="tweetschedulerstorage"
 az storage account create \
-    --name tweetschedulerstorage \
+    --name $STORAGE_ACCOUNT_NAME \
     --location norwayeast \
-    --resource-group tweetSchedulerFunction-rg \
+    --resource-group $RESOURCE_GROUP_NAME \
     --sku Standard_LRS
 # create the function app
+FUNCTION_NAME="ScheduleTweetsDL"
 az functionapp create \
-    --name ScheduleTweetsDL \
-    --resource-group tweetSchedulerFunction-rg \
-    --storage-account tweetschedulerstorage \
+    --name $FUNCTION_NAME \
+    --resource-group $RESOURCE_GROUP_NAME \
+    --storage-account $STORAGE_ACCOUNT_NAME \
     --consumption-plan-location uksouth \
     --runtime python \
     --runtime-version 3.8 \
