@@ -18,13 +18,17 @@ source .venv/bin/activate
 
 ```bash
 func init tweetSchedulerProj --python
-cd LocalFunctionProj
+cd tweetSchedulerProj
 func new \
     --name timerTriggeredTweet \
     --template TimerTrigger
 ```
 
-* Test the function locally using Azurite on Linux or Azure Storage Emulator on Windows.
+* I've used [**Azurite**](https://marketplace.visualstudio.com/items?itemName=Azurite.azurite) in Visual Studio Code to test the function locally on Linux. Use Azure Storage Emulator on Windows.
+
+```
+func start
+```
 
 ## Create other needed Azure resources
 ```bash
