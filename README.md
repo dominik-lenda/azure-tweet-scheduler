@@ -23,10 +23,16 @@ func new \
     --name timerTriggeredTweet \
     --template TimerTrigger
 ```
+## Running functions locally
+I've used [**Azurite**](https://marketplace.visualstudio.com/items?itemName=Azurite.azurite) in Visual Studio Code to test the function locally on Linux. Use Azure Storage Emulator on Windows.
 
-* I've used [**Azurite**](https://marketplace.visualstudio.com/items?itemName=Azurite.azurite) in Visual Studio Code to test the function locally on Linux. Use Azure Storage Emulator on Windows.
-
+Add this line to `local.settings.json` to test the function locally on Linux.
+```json
+"AzureWebJobsStorage": "UseDevelopmentStorage=true"
 ```
+
+Run function locally. 
+```bash
 func start
 ```
 
