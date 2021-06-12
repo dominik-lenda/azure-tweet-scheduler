@@ -17,10 +17,14 @@ source .venv/bin/activate
 ## Create a local function project using TimerTrigger template
 
 ```bash
+# create a function project
 func init tweetSchedulerProj --python
 cd tweetSchedulerProj
+
+# create a function using TimerTrigger template
+FUNC_NAME="timerTriggeredTweet"
 func new \
-    --name timerTriggeredTweet \
+    --name $FUNC_NAME \
     --template TimerTrigger
 ```
 ## Running functions locally
@@ -36,7 +40,7 @@ Run function locally.
 func start
 ```
 
-## Create other needed Azure resources
+## Create needed resources and resource 
 ```bash
 # create a resource group
 az group create \
