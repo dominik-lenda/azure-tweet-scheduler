@@ -10,16 +10,16 @@ Work outline:
 # Create and deploy timer-triggered Azure Functions
 ## Create and activate a virtual environment
 ```bash
-$ python -m venv .venv
-$ source .venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate
 ```
 
 ## Create a local function project using TimerTrigger template
 
 ```bash
-$ func init tweetSchedulerProj --python
-$ cd LocalFunctionProj
-$ func new \
+func init tweetSchedulerProj --python
+cd LocalFunctionProj
+func new \
     --name timerTriggeredTweet \
     --template TimerTrigger
 ```
@@ -29,17 +29,17 @@ $ func new \
 ## Create other needed Azure resources
 ```bash
 # create a resource group
-$ az group create \
+az group create \
     --name tweetSchedulerFunction-rg \
     --location norwayeast
 # create a storage account
-$ az storage account create \
+az storage account create \
     --name tweetschedulerstorage \
     --location norwayeast \
     --resource-group tweetSchedulerFunction-rg \
     --sku Standard_LRS
 # create the function app
-$ az functionapp create \
+az functionapp create \
     --name ScheduleTweetsDL \
     --resource-group tweetSchedulerFunction-rg \
     --storage-account tweetschedulerstorage \
@@ -51,20 +51,20 @@ $ az functionapp create \
 ```
 
 ## Deploy the function project to Azure
-```
+```bash
 func azure functionapp publish ScheduleTweetsDL
 ```
 
 # Create Cosmos DB account, database, and container
 
 ## Create Cosmos DB account 
-```
+```bash
 az cosmosdb create \
     --resource-group tweetSchedulerFunction-rg \
     --name scheduletweets-db
 ```
 ## Install Azure Cosmos DB Python SDK
-```
+```bash
 pip install azure-cosmos
 ```
 
@@ -86,36 +86,6 @@ export ACCOUNT_KEY=$(az cosmosdb keys list --resource-group $RES_GROUP --name $A
 
 ## Create database, container, and first item
 
-```python
-from azure.cosmos import CosmosClient, PartitionKey, exceptions
-
-import os
-
-url = os.environ['ACCOUNT_URI']
-key = os.environ['ACCOUNT_KEY']
-client = CosmosClient(url, credential=key)
-
-database_name = 'tweetSchedulerDB'
-try:
-    database = client.create_database(database_name)
-except exceptions.CosmosResourceExistsError:
-    database = client.get_database_client(database_name)
-container_name = 'Tweets'
-
-try:
-    container = database.create_container(id=container_name, partition_key=PartitionKey(path="/productName"))
-except exceptions.CosmosResourceExistsError:
-    container = database.get_container_client(container_name)
-except exceptions.CosmosHttpResponseError:
-    raise
-
-container.upsert_item({
-    'id': '1',
-    'tweet_content': 'First tweet'
-    }
-)
-
-```
 
 
 
