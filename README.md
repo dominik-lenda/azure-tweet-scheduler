@@ -40,21 +40,26 @@ Run function locally.
 func start
 ```
 
-## Create needed resources and resource 
+## Create resources for Functions app deployment
+
+### Create a resource group
 ```bash
-# create a resource group
 RESOURCE_GROUP_NAME="tweetSchedulerFunction-rg"
 az group create \
     --name $RESOURCE_GROUP_NAME \
     --location norwayeast
-# create a storage account
+```
+### Create a storage account
+```bash
 STORAGE_ACCOUNT_NAME="tweetschedulerstorage"
 az storage account create \
     --name $STORAGE_ACCOUNT_NAME \
     --location norwayeast \
     --resource-group $RESOURCE_GROUP_NAME \
     --sku Standard_LRS
-# create the function app
+```
+### Create the function app
+```
 FUNCTION_NAME="ScheduleTweetsDL"
 az functionapp create \
     --name $FUNCTION_NAME \
