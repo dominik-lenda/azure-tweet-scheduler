@@ -43,6 +43,7 @@ func start
 ## Create resources for Functions app deployment
 
 ### Create a resource group
+Login to Azure Portal `az login`.
 ```bash
 RESOURCE_GROUP_NAME="tweetSchedulerFunction-rg"
 az group create \
@@ -76,37 +77,6 @@ az functionapp create \
 ```bash
 func azure functionapp publish ScheduleTweetsDL
 ```
-
-# Create Cosmos DB account, database, and container
-
-## Create Cosmos DB account 
-```bash
-az cosmosdb create \
-    --resource-group tweetSchedulerFunction-rg \
-    --name scheduletweets-db
-```
-## Install Azure Cosmos DB Python SDK
-```bash
-pip install azure-cosmos
-```
-
-## Configure a virtual environment
-```
-python3 -m venv azure-cosmosdb-sdk-environment
-source azure-cosmosdb-sdk-environment/bin/activate
-```
-
-## Get credentials
-
-```bash
-RES_GROUP="tweetSchedulerFunction-rg"
-ACCT_NAME="scheduletweets-db"
-
-export ACCOUNT_URI=$(az cosmosdb show --resource-group $RES_GROUP --name $ACCT_NAME --query documentEndpoint --output tsv)
-export ACCOUNT_KEY=$(az cosmosdb keys list --resource-group $RES_GROUP --name $ACCT_NAME --query primaryMasterKey --output tsv)
-```
-
-## Create database, container, and first item
 
 
 
